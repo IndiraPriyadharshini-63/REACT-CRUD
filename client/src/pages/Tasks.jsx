@@ -24,8 +24,8 @@ function Tasks() {
   };
   return (
     <div className=" d-flex vh-100 bg-primary justify-content-center align-items-center">
-      <div className="w-50 bg-white rounded p-3">
-        <Link to="/create" className="btn btn-primary">
+      <div className="w-50 bg-white rounded p-3 ">
+        <Link to="/create" className="btn btn-primary m-2">
           Add Task
         </Link>
         <Link to="/create-event" className="btn btn-primary">
