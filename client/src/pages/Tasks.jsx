@@ -28,6 +28,9 @@ function Tasks() {
         <Link to="/create" className="btn btn-primary">
           Add Task
         </Link>
+        <Link to="/create-event" className="btn btn-primary">
+          Create Event
+        </Link>
         <table className="table">
           <thead>
             <tr>

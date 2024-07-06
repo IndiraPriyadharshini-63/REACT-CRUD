@@ -1,61 +1,64 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const TaskModel = require('./models/TaskModel');
- require("dotenv").config();
-
+const TaskModel = require("./models/TaskModel");
+require("dotenv").config();
 
 const app = express();
-app.use(cors()); 
+app.use(cors());
 app.use(express.json());
 
 mongoose
-  .connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.bgbhkoo.mongodb.net/crud?retryWrites=true&w=majority&appName=Cluster0`)
+  .connect(
+    `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.bgbhkoo.mongodb.net/crud?retryWrites=true&w=majority&appName=Cluster0`
+  )
   .then(() => {
     console.log("DataBase Connected Succesfully");
   })
   .catch((err) => {
-    console.g(err.message);
+    console.log(err.message);
   });
 
-app.get('/', (req, res) => {
-      TaskModel.find({})
-      .then(users => res.json(users))
-      .catch(err => res.json(err))
-})
+app.get("/", (req, res) => {
+  TaskModel.find({})
+    .then((users) => res.json(users))
+    .catch((err) => res.json(err));
+});
 
-app.get('/getTask/:id', (req, res)=> {
-     const id = req.params.id ;
-     TaskModel.findById({_id:id})
-     .then(users => res.json(users))
-     .catch(err => res.json(err))
-})
+app.get("/getTask/:id", (req, res) => {
+  const id = req.params.id;
+  TaskModel.findById({ _id: id })
+    .then((users) => res.json(users))
+    .catch((err) => res.json(err));
+});
 
-app.put('/updateTask/:id', (req, res)=> {
-      const id = req.params.id;
-      TaskModel.findByIdAndUpdate({_id:id},{
-            task: req.body.task, 
-            start: req.body.start, 
-            end: req.body.end})
-            .then(users => res.json(users))
-            .catch(err => res.json(err)) 
-})
+app.put("/updateTask/:id", (req, res) => {
+  const id = req.params.id;
+  TaskModel.findByIdAndUpdate(
+    { _id: id },
+    {
+      task: req.body.task,
+      start: req.body.start,
+      end: req.body.end,
+    }
+  )
+    .then((users) => res.json(users))
+    .catch((err) => res.json(err));
+});
 
 app.delete("/deleteTask/:id", (req, res) => {
-      const id = req.params.id;
-      TaskModel.findByIdAndDelete({_id: id})
-      .then(users => res.json(users))
-      .catch(err => res.json(err))   
-   } )
-
+  const id = req.params.id;
+  TaskModel.findByIdAndDelete({ _id: id })
+    .then((users) => res.json(users))
+    .catch((err) => res.json(err));
+});
 
 app.post("/createTask", (req, res) => {
-   TaskModel.create(req.body)
-   .then(users => res.json(users))
-   .catch(err => res.json(err))   
-} )
+  TaskModel.create(req.body)
+    .then((users) => res.json(users))
+    .catch((err) => res.json(err));
+});
 
-app.listen(3001, ()=> {
-     console.log(`server is running ${process.env.PORT}`); 
-})
-
+app.listen(3001, () => {
+  console.log(`server is running ${process.env.PORT}`);
+});
