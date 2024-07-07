@@ -1,0 +1,11 @@
+.calendar-component {
+      font-family: sans-serif;
+      text-align: center;
+      margin: 2rem;
+} 
+.rbc-btn-group  button {
+background-color: #0d6efd;
+color: white;
+border-radius: 10px;
+border:2px solid white;
+} 
