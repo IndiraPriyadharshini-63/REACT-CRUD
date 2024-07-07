@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { host, deleteTaskRoute } from "../utils/APIRoutes";
+import Navbar from "../components/Navbar";
 
 function Tasks() {
   const [tasks, setTasks] = useState([]);
@@ -24,6 +25,7 @@ function Tasks() {
   };
   return (
     <div className=" d-flex vh-100 bg-primary justify-content-center align-items-center">
+      <Navbar />
       <div className="w-50 bg-white rounded p-3 ">
         <Link to="/create" className="btn btn-primary m-2">
           Add Task

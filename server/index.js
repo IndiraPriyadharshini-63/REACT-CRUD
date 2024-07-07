@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const TaskModel = require("./models/TaskModel");
+const EventModel = require("./models/EventModel");
 require("dotenv").config();
 
 const app = express();
@@ -56,6 +57,18 @@ app.delete("/deleteTask/:id", (req, res) => {
 app.post("/createTask", (req, res) => {
   TaskModel.create(req.body)
     .then((users) => res.json(users))
+    .catch((err) => res.json(err));
+});
+
+app.post("/createEvent", (req, res) => {
+  EventModel.create(req.body)
+    .then((events) => res.json(events))
+    .catch((err) => res.json(err));
+});
+
+app.get("/getEvent", (req, res) => {
+  EventModel.find({})
+    .then((events) => res.json(events))
     .catch((err) => res.json(err));
 });
 

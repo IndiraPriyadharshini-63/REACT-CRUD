@@ -132,8 +132,8 @@ export default [
   {
     id: 16,
     title: "Video Record",
-    start: new Date(2015, 3, 14, 15, 30, 0),
-    end: new Date(2015, 3, 14, 19, 0, 0)
+    start: now,
+    end: now
   },
   {
     id: 17,
