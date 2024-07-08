@@ -5,7 +5,7 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "../styles/CalendarComponent.css";
 import "../styles/Modal.css";
-import { getEventRoute } from "../utils/APIRoutes";
+import { getEventRoute, createEventRoute } from "../utils/APIRoutes";
 
 moment.locale("en-GB");
 const localizer = momentLocalizer(moment);
@@ -19,7 +19,7 @@ function CalendarComponent() {
       .then((result) => setEventData(result.data))
       .catch((err) => console.log(err));
   }, []);
-  console.log(EventData);
+  //console.log(EventData);
 
   const handleSelect = ({ start, end }) => {
     const title = window.prompt("New Event name");
@@ -32,15 +32,14 @@ function CalendarComponent() {
           title,
         },
       ]);
+
+    axios
+      .post(createEventRoute, { title, start, end })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => console.log(err));
   };
-
-  // const handleEvent = (e) => {
-  //   const start = e.start;
-  //   const end = e.end;
-  //   const box = e.box;
-  //   console.log(box);
-
-  // };
 
   return (
     <div className="calendar-component">
@@ -52,7 +51,7 @@ function CalendarComponent() {
         defaultView="month"
         events={EventData}
         style={{ height: "100vh" }}
-        onSelectEvent={(event) => alert(event.title, event.start, event.end)}
+        onSelectEvent={(event) => alert(event.title)}
         onSelectSlot={handleSelect}
       />
     </div>
