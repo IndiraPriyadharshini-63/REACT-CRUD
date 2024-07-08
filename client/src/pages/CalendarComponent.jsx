@@ -1,41 +1,46 @@
-import React, { useState } from "react";
-//import FullCalendar from "@fullcalendar/react";
-//import dayGridPlugin from "@fullcalendar/daygrid";
-//import interactionPlugin from "@fullcalendar/interaction";
-import "../styles/CalendarComponent.css";
-import "../styles/Modal.css";
-import events from "../events";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import moment from "moment";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import moment from "moment";
-import EventModal from "../components/EventModal";
+import "../styles/CalendarComponent.css";
+import "../styles/Modal.css";
+import { getEventRoute } from "../utils/APIRoutes";
 
 moment.locale("en-GB");
 const localizer = momentLocalizer(moment);
 
 function CalendarComponent() {
-  const [EventData, setEventData] = useState(events);
+  const [EventData, setEventData] = useState();
 
-  // const handleSelect = ({ start, end }) => {
-  //   const title = window.prompt("New Event name");
-  //   if (title)
-  //     setEventData([
-  //       ...EventData,
-  //       {
-  //         start,
-  //         end,
-  //         title,
-  //       },
-  //     ]);
-  // };
+  useEffect(() => {
+    axios
+      .get(getEventRoute)
+      .then((result) => setEventData(result.data))
+      .catch((err) => console.log(err));
+  }, []);
+  console.log(EventData);
 
-  const handleEvent = (e) => {
-    const start = e.start;
-    const end = e.end;
-    const box = e.box;
-    console.log(box);
-    
+  const handleSelect = ({ start, end }) => {
+    const title = window.prompt("New Event name");
+    if (title)
+      setEventData([
+        ...EventData,
+        {
+          start,
+          end,
+          title,
+        },
+      ]);
   };
+
+  // const handleEvent = (e) => {
+  //   const start = e.start;
+  //   const end = e.end;
+  //   const box = e.box;
+  //   console.log(box);
+
+  // };
 
   return (
     <div className="calendar-component">
@@ -48,7 +53,7 @@ function CalendarComponent() {
         events={EventData}
         style={{ height: "100vh" }}
         onSelectEvent={(event) => alert(event.title, event.start, event.end)}
-        onSelectSlot={(event) => handleEvent(event)}
+        onSelectSlot={handleSelect}
       />
     </div>
   );
