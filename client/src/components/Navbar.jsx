@@ -1,52 +1,128 @@
-import React from 'react'
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import logo from '../assets/logo192.png'
+import logo from "../assets/logo192.png";
+import {
+  CContainer,
+  CNavbar,
+  CNavbarNav,
+  CButton,
+  CFormInput,
+  CForm,
+  CNavLink,
+  CNavItem,
+  CDropdownItem,
+  CDropdownDivider,
+  CDropdownMenu,
+  CDropdownToggle,
+  CDropdown,
+  CCollapse,
+  CNavbarToggler,
+  CNavbarBrand,
+} from "@coreui/react";
 
 function Navbar() {
+  // const [visible, setVisible] = useState(false);
+  // return (
+  //   <>
+  //     <CNavbar expand="lg" className="bg-body-tertiary" placement="fixed-top">
+  //       <CContainer fluid>
+  //         <CNavbarBrand href="#">Navbar</CNavbarBrand>
+  //         <CNavbarToggler onClick={() => setVisible(!visible)} />
+  //         <CCollapse className="navbar-collapse" visible={visible}>
+  //           <CNavbarNav>
+  //             <CNavItem>
+  //               <CNavLink href="#" active>
+  //                 Home
+  //               </CNavLink>
+  //             </CNavItem>
+  //             <CNavItem>
+  //               <CNavLink href="#">Link</CNavLink>
+  //             </CNavItem>
+  //             <CDropdown variant="nav-item" popper={false}>
+  //               <CDropdownToggle color="secondary">
+  //                 Dropdown button
+  //               </CDropdownToggle>
+  //               <CDropdownMenu>
+  //                 <CDropdownItem href="#">Action</CDropdownItem>
+  //                 <CDropdownItem href="#">Another action</CDropdownItem>
+  //                 <CDropdownDivider />
+  //                 <CDropdownItem href="#">Something else here</CDropdownItem>
+  //               </CDropdownMenu>
+  //             </CDropdown>
+  //             <CNavItem>
+  //               <CNavLink href="#" disabled>
+  //                 Disabled
+  //               </CNavLink>
+  //             </CNavItem>
+  //           </CNavbarNav>
+  //           <CForm className="d-flex">
+  //             <CFormInput type="search" className="me-2" placeholder="Search" />
+  //             <CButton type="submit" color="success" variant="outline">
+  //               Search
+  //             </CButton>
+  //           </CForm>
+  //         </CCollapse>
+  //       </CContainer>
+  //     </CNavbar>
+  //   </>
+  // );
   return (
     <>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">
-  <img src={logo} width="30" height="30" alt="" />
-  </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/">Home </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/create">Add Task</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/create-event">Create Event</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
+      <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top p-2">
+        <a className="navbar-brand" href="#">
+          <img src={logo} width="30" height="30" alt="" />
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
+        <div
+          className="collapse navbar-collapse d-felx justify-content-around"
+          id="navbarSupportedContent"
+        >
+          <ul className="navbar-nav mr-auto">
+            <li className="nav-item active p-2">
+              <a className="nav-link" href="/">
+                Home{" "}
+              </a>
+            </li>
+            <li className="nav-item p-2">
+              <a className="nav-link" href="/create">
+                Add Task
+              </a>
+            </li>
+            <li className="nav-item p-2">
+              <a className="nav-link" href="/create-event">
+                Create Event
+              </a>
+            </li>
+          </ul>
+          <form className="form-inline mx-2 my-lg-0  ">
+            <input
+              className="form-control mr-sm-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button
+              className="btn btn-outline-primary mx-2 my-sm-0"
+              type="submit"
+            >
+              Search
+            </button>
+          </form>
         </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
+      </nav>
     </>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;
