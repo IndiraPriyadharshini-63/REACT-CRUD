@@ -4,7 +4,6 @@ import moment from "moment";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "../styles/CalendarComponent.css";
-import "../styles/Modal.css";
 import { getEventRoute, createEventRoute } from "../utils/APIRoutes";
 
 moment.locale("en-GB");
