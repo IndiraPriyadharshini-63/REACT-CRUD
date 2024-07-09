@@ -5,6 +5,8 @@ import CalendarComponent from "./pages/CalendarComponent";
 import CreateTask from "./pages/CreateTask";
 import Tasks from "./pages/Tasks";
 import UpdateTask from "./pages/UpdateTask";
+import Files from "./pages/Files"
+
 
 function App() {
   return (
@@ -15,6 +17,7 @@ function App() {
           <Route path="/create" element={<CreateTask />}></Route>
           <Route path="/create-event" element={<CalendarComponent />}></Route>
           <Route path="/update/:id" element={<UpdateTask />}></Route>
+          <Route path="/files" element={<Files />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

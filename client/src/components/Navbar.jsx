@@ -44,6 +44,11 @@ function Navbar() {
                 Create Event
               </a>
             </li>
+            <li className="nav-item p-2">
+              <a className="nav-link font-weight-bold text-dark" href="/files">
+                Files
+              </a>
+            </li>
           </ul>
         </div>
       </nav>
