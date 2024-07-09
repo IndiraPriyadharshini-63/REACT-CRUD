@@ -7,7 +7,7 @@ function Navbar() {
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top p-2">
         <a className="navbar-brand" href="/">
-          <img src={logo} width="30" height="30" alt="" />
+          <img src={logo} width="30" height="30" alt="" className="m-2" />
         </a>
         <button
           className="navbar-toggler"
@@ -22,40 +22,29 @@ function Navbar() {
         </button>
 
         <div
-          className="collapse navbar-collapse d-felx justify-content-around"
+          className="collapse navbar-collapse d-felx justify-content-end"
           id="navbarSupportedContent"
         >
           <ul className="navbar-nav mr-auto">
-            <li className="nav-item active p-2">
-              <a className="nav-link" href="/">
+            <li className="nav-item active p-2 ">
+              <a className="nav-link font-weight-bold text-dark" href="/">
                 Home{" "}
               </a>
             </li>
             <li className="nav-item p-2">
-              <a className="nav-link" href="/create">
+              <a className="nav-link font-weight-bold text-dark" href="/create">
                 Add Task
               </a>
             </li>
             <li className="nav-item p-2">
-              <a className="nav-link" href="/create-event">
+              <a
+                className="nav-link font-weight-bold text-dark"
+                href="/create-event"
+              >
                 Create Event
               </a>
             </li>
           </ul>
-          <form className="form-inline mx-2 my-lg-0  ">
-            <input
-              className="form-control mr-sm-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button
-              className="btn btn-outline-primary mx-2 my-sm-0"
-              type="submit"
-            >
-              Search
-            </button>
-          </form>
         </div>
       </nav>
     </>

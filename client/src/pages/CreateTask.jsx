@@ -20,7 +20,7 @@ function CreateTask() {
       .catch((err) => console.log(err));
   };
   return (
-    <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
+    <div className="d-flex vh-100 bg-info justify-content-center align-items-center">
       <div className="v-50 bg-white rounded p-3">
         <form onSubmit={Submit}>
           <h2>Add Task</h2>
@@ -51,7 +51,7 @@ function CreateTask() {
               onChange={(e) => setEnd(e.target.value)}
             />
           </div>
-          <button className="btn btn-success"> Submit</button>
+          <button className="btn btn-info text-white"> Submit</button>
         </form>
       </div>
     </div>

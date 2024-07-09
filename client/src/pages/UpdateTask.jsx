@@ -34,7 +34,7 @@ function UpdateTask() {
       .catch((err) => console.log(err));
   };
   return (
-    <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
+    <div className="d-flex vh-100 bg-info justify-content-center align-items-center">
       <div className="v-50 bg-white rounded p-3">
         <form onSubmit={Update}>
           <h2>Update Tasks</h2>
@@ -68,7 +68,7 @@ function UpdateTask() {
               onChange={(e) => setEnd(e.target.value)}
             />
           </div>
-          <button className="btn btn-success"> Update</button>
+          <button  className="btn btn-info text-white"> Update</button>
         </form>
       </div>
     </div>

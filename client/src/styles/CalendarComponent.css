@@ -4,8 +4,16 @@
       margin: 2rem;
 } 
 .rbc-btn-group  button {
-background-color: #0d6efd;
-color: white;
+background-color: cyan;
+color: black;
 border-radius: 10px;
 border:2px solid white;
 } 
+
+.rbc-month-header {
+      background-color: cyan;
+}
+
+/* .rbc-toolbar {
+      color: cyan;
+} */
