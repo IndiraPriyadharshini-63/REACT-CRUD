@@ -5,3 +5,4 @@ export const getTaskRoute = `${host}/getTask`;
 export const updateTaskRoute = `${host}/updateTask`;
 export const createEventRoute = `${host}/createEvent`;
 export const getEventRoute = `${host}/getEvent`;
+export const getFilesRoute = `${host}/getFiles`;

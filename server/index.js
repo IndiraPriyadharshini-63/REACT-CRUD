@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const TaskModel = require("./models/TaskModel");
 const EventModel = require("./models/EventModel");
+const FilesModel = require("./models/FilesModel");
 require("dotenv").config();
 
 const app = express();
@@ -69,6 +70,12 @@ app.post("/createEvent", (req, res) => {
 app.get("/getEvent", (req, res) => {
   EventModel.find({})
     .then((events) => res.json(events))
+    .catch((err) => res.json(err));
+});
+
+app.get("/getFiles", (req, res) => {
+  FilesModel.find({})
+    .then((users) => res.json(users))
     .catch((err) => res.json(err));
 });
 
