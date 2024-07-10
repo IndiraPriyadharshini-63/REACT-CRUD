@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const fileUpload = require("express-fileupload");
 const TaskModel = require("./models/TaskModel");
 const EventModel = require("./models/EventModel");
 const FilesModel = require("./models/FilesModel");
@@ -9,6 +10,11 @@ require("dotenv").config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(
+  fileUpload({
+    limits: { filesize: 50 * 1024 * 1024 },
+  })
+);
 
 mongoose
   .connect(
@@ -76,6 +82,18 @@ app.get("/getEvent", (req, res) => {
 app.get("/getFiles", (req, res) => {
   FilesModel.find({})
     .then((users) => res.json(users))
+    .catch((err) => res.json(err));
+});
+
+// app.post("/createFiles", (req, res) => {
+//   FilesModel.create(req.body)
+//     .then((events) => res.json(events))
+//     .catch((err) => res.json(err));
+// });
+
+app.post("/postFiles", (req, res) => {
+  FilesModel.create(req.body)
+    .then((file) => res.json(file))
     .catch((err) => res.json(err));
 });
 

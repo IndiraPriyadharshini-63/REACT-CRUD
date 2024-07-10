@@ -1,10 +1,11 @@
 const mongoose = require("mongoose");
 
 const FilesSchema = new mongoose.Schema({
-      id:Number,
+      
       name: String,
-      isFolder: Boolean,
-      items: Array
+      size: Number,
+      // header: Object,
+      type: String 
 });
 
 const FilesModel = mongoose.model("files", FilesSchema);

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../styles/Folder.css";
 
 function Folder({ handleInsertNode, explorer }) {
-  console.log(explorer);
+  // console.log(explorer);
 
   const [expand, setExpand] = useState(false);
   const [showInput, setShowInput] = useState({

@@ -10,14 +10,7 @@ function CreateTask() {
   const navigate = useNavigate();
 
   const Submit = (e) => {
-    e.preventDefault();
-    axios
-      .post(createTaskRoute, { task, start, end })
-      .then((result) => {
-        console.log(result);
-        navigate("/");
-      })
-      .catch((err) => console.log(err));
+
   };
   return (
     <div className="d-flex vh-100 bg-info justify-content-center align-items-center">
