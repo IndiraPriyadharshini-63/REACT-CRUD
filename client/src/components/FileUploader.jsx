@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { uploadFilesRoute } from "../utils/APIRoutes";
-import axios from "axios";
+
 
 function FileUploader() {
   // const [files, setFiles] = useState<File | null>(null);
@@ -19,29 +19,38 @@ function FileUploader() {
       setStatus("uploading");
       const formData = new FormData();
       formData.append("file", file);
-
-      axios({
-        method: "post",
-        url: uploadFilesRoute,
-        data:formData,
-        headers:{"Content-Type": "multipart/form-data"},
-      })
-      .then((res) => console.log(res),
-                      setStatus("success") )
-      .catch((err)=> console.log(err),
-                      );
-      // try {
-      //   const result = await fetch("https://httpbin.org/post", {
-      //     method: "POST",
-      //     body: formData,
+     
+        // this not worked
+      // const result = axios({
+      //   method: "post",
+      //   url: uploadFilesRoute,
+      //   data: formData,
+      //   headers: { "Content-Type": "multipart/form-data" },
+      // })
+      //   .then(async function (res) {
+      //     //  const data = await result.json()
+      //     console.log(res);
+      //     setStatus("success");
+      //   })
+      //   .catch(function (err) {
+      //     console.log(err);
+      //     setStatus("fail");
       //   });
-      //   const data = await result.json();
-      //   console.log(data);
-      //   setStatus("success");
-      // } catch (err) {
-      //   console.log(err);
-      //   setStatus("fail");
-      // }
+
+
+
+      try {
+        const result = await fetch(uploadFilesRoute, {
+          method: "POST",
+          body: formData,
+        });
+        const data = await result.json();
+        console.log(data);
+        setStatus("success");
+      } catch (err) {
+        console.log(err);
+        setStatus("fail");
+      }
     }
   };
   return (
