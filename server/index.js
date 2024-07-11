@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
+const multer = require("multer");
 const TaskModel = require("./models/TaskModel");
 const EventModel = require("./models/EventModel");
 const FilesModel = require("./models/FilesModel");
@@ -15,6 +16,8 @@ app.use(
     limits: { filesize: 50 * 1024 * 1024 },
   })
 );
+
+const upload = multer({ dest: "public/uploads/" }).single("file");
 
 mongoose
   .connect(
@@ -85,16 +88,19 @@ app.get("/getFiles", (req, res) => {
     .catch((err) => res.json(err));
 });
 
-// app.post("/createFiles", (req, res) => {
-//   FilesModel.create(req.body)
-//     .then((events) => res.json(events))
-//     .catch((err) => res.json(err));
-// });
-
 app.post("/postFiles", (req, res) => {
   FilesModel.create(req.body)
     .then((file) => res.json(file))
     .catch((err) => res.json(err));
+});
+
+app.post("/upload/files", (req, res) => {
+  upload(req, res, (err) => {
+    const file = req.file;
+    FilesModel.create(req.body)
+    .then((file) => res.json(file))
+    .catch((err) => res.json(err))
+  });
 });
 
 app.listen(3001, () => {

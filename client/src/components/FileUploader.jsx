@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { uploadFilesRoute } from "../utils/APIRoutes";
 
-
 function FileUploader() {
   // const [files, setFiles] = useState<File | null>(null);
   //const [status, setStatus] =  useState<"initial" | "uploading" | "success" | "fail">("initial")
   const [file, setFile] = useState(null);
   const [status, setStatus] = useState("initial");
+
+
   const handleFileChange = (e) => {
     if (e.target.files) {
       setStatus("initial");
@@ -14,30 +15,22 @@ function FileUploader() {
     }
   };
 
+  // const handleFileChange = (files) => {
+  //   const file = files[0];
+  //   const formData = new FormData();
+  //   formData.append('file', file);
+  //   const config = {
+  //     headers: {
+  //       "Content-Type":"multipart/form-data"
+  //     }
+  //   };
+  // }
+
   const handleUpload = async () => {
     if (file) {
       setStatus("uploading");
       const formData = new FormData();
       formData.append("file", file);
-     
-        // this not worked
-      // const result = axios({
-      //   method: "post",
-      //   url: uploadFilesRoute,
-      //   data: formData,
-      //   headers: { "Content-Type": "multipart/form-data" },
-      // })
-      //   .then(async function (res) {
-      //     //  const data = await result.json()
-      //     console.log(res);
-      //     setStatus("success");
-      //   })
-      //   .catch(function (err) {
-      //     console.log(err);
-      //     setStatus("fail");
-      //   });
-
-
 
       try {
         const result = await fetch(uploadFilesRoute, {
@@ -59,7 +52,7 @@ function FileUploader() {
         <label htmlFor="file" className="sr-only">
           Choose a File
         </label>
-        <input name="foo" id="file" type="file" onChange={handleFileChange} />
+        <input id="file" type="file" onChange={handleFileChange} />
       </div>
       {file && (
         <section>
