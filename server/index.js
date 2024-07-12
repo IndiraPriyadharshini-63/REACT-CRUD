@@ -2,22 +2,39 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
-const multer = require("multer");
+
 const TaskModel = require("./models/TaskModel");
 const EventModel = require("./models/EventModel");
 const FilesModel = require("./models/FilesModel");
 require("dotenv").config();
 
+
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(
-  fileUpload({
-    limits: { filesize: 50 * 1024 * 1024 },
-  })
-);
+app.use("/files", express.static("files"));
+// app.use(
+//   fileUpload({
+//     limits: { filesize: 50 * 1024 * 1024 },
+//   })
+// );
 
-const upload = multer({ dest: "public/uploads/" }).single("file");
+
+//........multer..........
+const multer = require("multer");
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./files");
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now();
+    cb(null, uniqueSuffix + file.originalname);
+  },
+});
+require("./models/pdfDetails");
+const PdfSchema = mongoose.model("PdfDetails");
+
+const upload = multer({ storage: storage });
 
 mongoose
   .connect(
@@ -102,6 +119,29 @@ app.post("/upload/files", (req, res) => {
     .catch((err) => res.json(err))
   });
 });
+
+//.......upload pdf....
+app.post("/upload-files", upload.single("file"), async (req, res) => {
+  console.log(req.file);
+  const title = req.body.title;
+  const fileName = req.file.filename;
+  try {
+    await PdfSchema.create({ title: title, pdf: fileName });
+    res.send({ status: "ok" });
+  } catch (error) {
+    res.json({ status: error });
+  }
+});
+
+//............get pdf.......
+app.get("/get-files", async (req, res) => {
+  try {
+    PdfSchema.find({}).then((data) => {
+      res.send({ status: "ok", data: data });
+    });
+  } catch (error) {}
+});
+
 
 app.listen(3001, () => {
   console.log(`server is running ${process.env.PORT}`);

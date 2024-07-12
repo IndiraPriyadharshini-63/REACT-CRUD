@@ -70,6 +70,15 @@ function FileUploader() {
         </button>
       )}
       <Result status={status} />
+      <div>
+        <h4>Uploaded PDF</h4>
+        <div className="output-div">
+          <div className="input-div">
+            <h6>Title</h6>
+            <button>Show Pdf</button>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
