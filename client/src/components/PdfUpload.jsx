@@ -6,8 +6,8 @@ import { pdfjs } from "react-pdf";
 import PdfComp from "./PdfComp";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.mjs',
-  import.meta.url,
+  "pdfjs-dist/build/pdf.worker.min.mjs",
+  import.meta.url
 ).toString();
 
 function PdfUpload() {
@@ -58,7 +58,10 @@ function PdfUpload() {
   };
   return (
     <div className="file-ulpoad">
-      <Result status={status} />
+      <div className="alertNotification">
+      <Result status={status}/>
+      </div>
+      
       <form className="formStyle" onSubmit={submitFile}>
         <h4>Upload Files</h4>
         <br />
@@ -103,7 +106,7 @@ function PdfUpload() {
               })}
         </div>
       </div>
-      <PdfComp pdfFile={pdfFile}/>
+      <PdfComp pdfFile={pdfFile} />
     </div>
   );
 }
