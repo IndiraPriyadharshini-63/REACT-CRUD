@@ -1,24 +1,15 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const fileUpload = require("express-fileupload");
-
 const TaskModel = require("./models/TaskModel");
 const EventModel = require("./models/EventModel");
 const FilesModel = require("./models/FilesModel");
 require("dotenv").config();
 
-
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/files", express.static("files"));
-// app.use(
-//   fileUpload({
-//     limits: { filesize: 50 * 1024 * 1024 },
-//   })
-// );
-
 
 //........multer..........
 const multer = require("multer");
@@ -33,7 +24,6 @@ const storage = multer.diskStorage({
 });
 require("./models/pdfDetails");
 const PdfSchema = mongoose.model("PdfDetails");
-
 const upload = multer({ storage: storage });
 
 mongoose
@@ -99,27 +89,6 @@ app.get("/getEvent", (req, res) => {
     .catch((err) => res.json(err));
 });
 
-app.get("/getFiles", (req, res) => {
-  FilesModel.find({})
-    .then((users) => res.json(users))
-    .catch((err) => res.json(err));
-});
-
-app.post("/postFiles", (req, res) => {
-  FilesModel.create(req.body)
-    .then((file) => res.json(file))
-    .catch((err) => res.json(err));
-});
-
-app.post("/upload/files", (req, res) => {
-  upload(req, res, (err) => {
-    const file = req.file;
-    FilesModel.create(req.body)
-    .then((file) => res.json(file))
-    .catch((err) => res.json(err))
-  });
-});
-
 //.......upload pdf....
 app.post("/upload-files", upload.single("file"), async (req, res) => {
   console.log(req.file);
@@ -141,7 +110,6 @@ app.get("/get-files", async (req, res) => {
     });
   } catch (error) {}
 });
-
 
 app.listen(3001, () => {
   console.log(`server is running ${process.env.PORT}`);

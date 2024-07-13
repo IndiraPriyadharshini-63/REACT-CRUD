@@ -5,5 +5,5 @@ export const getTaskRoute = `${host}/getTask`;
 export const updateTaskRoute = `${host}/updateTask`;
 export const createEventRoute = `${host}/createEvent`;
 export const getEventRoute = `${host}/getEvent`;
-export const getFilesRoute = `${host}/getFiles`;
-export const uploadFilesRoute = `${host}/postFiles`;
+export const getFileRoute = `${host}/get-files`;
+export const uploadFileRoute = `${host}/upload-files`;

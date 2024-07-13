@@ -15,16 +15,7 @@ function FileUploader() {
     }
   };
 
-  // const handleFileChange = (files) => {
-  //   const file = files[0];
-  //   const formData = new FormData();
-  //   formData.append('file', file);
-  //   const config = {
-  //     headers: {
-  //       "Content-Type":"multipart/form-data"
-  //     }
-  //   };
-  // }
+ 
 
   const handleUpload = async () => {
     if (file) {
