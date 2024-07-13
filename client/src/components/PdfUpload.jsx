@@ -2,11 +2,19 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { getFileRoute, uploadFileRoute } from "../utils/APIRoutes";
 import "../styles/PdfUpload.css";
+import { pdfjs } from "react-pdf";
+import PdfComp from "./PdfComp";
+
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.mjs',
+  import.meta.url,
+).toString();
 
 function PdfUpload() {
   const [title, setTitle] = useState("");
   const [file, setFile] = useState("");
   const [allImage, setAllImage] = useState(null);
+  const [pdfFile, setPdfFile] = useState(null);
   const [status, setStatus] = useState("initial");
 
   const handleFileChange = (e) => {
@@ -46,8 +54,7 @@ function PdfUpload() {
   };
 
   const showPdf = (pdf) => {
-    window.open(`http://localhost:3001/files/${pdf}`, "_blank", "noreferrer");
-    //setPdfFile(`http://localhost:3001/files/${pdf}`, "_blank", "noreferrer");
+    setPdfFile(`http://localhost:3001/files/${pdf}`);
   };
   return (
     <div className="file-ulpoad">
@@ -96,6 +103,7 @@ function PdfUpload() {
               })}
         </div>
       </div>
+      <PdfComp pdfFile={pdfFile}/>
     </div>
   );
 }
