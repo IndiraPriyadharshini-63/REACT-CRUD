@@ -5,6 +5,7 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "../styles/CalendarComponent.css";
 import { getEventRoute, createEventRoute } from "../utils/APIRoutes";
+import Navbar from "../components/Navbar";
 
 moment.locale("en-GB");
 const localizer = momentLocalizer(moment);
@@ -41,19 +42,22 @@ function CalendarComponent() {
   };
 
   return (
-    <div className="calendar-component">
-      <Calendar
-        views={["day", "agenda", "work_week", "month"]}
-        selectable
-        localizer={localizer}
-        defaultDate={new Date()}
-        defaultView="month"
-        events={EventData}
-        style={{ height: "100vh" }}
-        onSelectEvent={(event) => alert(event.title)}
-        onSelectSlot={handleSelect}
-      />
-    </div>
+    <>
+    <Navbar />
+      <div className="calendar-component">
+        <Calendar
+          views={["day", "agenda", "work_week", "month"]}
+          selectable
+          localizer={localizer}
+          defaultDate={new Date()}
+          defaultView="month"
+          events={EventData}
+          style={{ height: "100vh" }}
+          onSelectEvent={(event) => alert(event.title)}
+          onSelectSlot={handleSelect}
+        />
+      </div>
+    </>
   );
 }
 
