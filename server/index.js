@@ -1,6 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const JWT_SECRET = "gybqxte356vetrvy56gu5745btwtrey56ub57nu5";
 const TaskModel = require("./models/TaskModel");
 const EventModel = require("./models/EventModel");
 const FilesModel = require("./models/FilesModel");
@@ -109,6 +112,48 @@ app.get("/get-files", async (req, res) => {
       res.send({ status: "ok", data: data });
     });
   } catch (error) {}
+});
+
+require("./models/userDetails");
+const User = mongoose.model("Users");
+
+app.post("/register", async (req, res) => {
+  const { fname, lname, email, password } = req.body;
+  const encryptedPassword = await bcrypt.hash(password, 10);
+  try {
+    const oldUser = await User.findOne({ email });
+    if (oldUser) {
+      return res.json({ error: "User Exists" });
+    }
+    await User.create({
+      fname,
+      lname,
+      email,
+      password: encryptedPassword,
+    });
+    res.send({ status: "ok" });
+  } catch (error) {
+    res.send({ status: "error" });
+  }
+});
+
+app.post("/login-user", async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
+  if (!user) {
+    return res.json({ error: "User Not Found" });
+  }
+
+  if (await bcrypt.compare(password, user.password)) {
+    const token = jwt.sign({ email: user.email }, JWT_SECRET);
+
+    if (res.status(201)) {
+      return res.json({ status: "ok", data: token });
+    } else {
+      return res.json({ status: "error" });
+    }
+  }
+  res.json({ status: "error", error: "Invalid password" });
 });
 
 app.listen(3001, () => {

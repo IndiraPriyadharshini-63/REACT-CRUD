@@ -3,6 +3,11 @@ import React from "react";
 import logo from "../assets/logo192.png";
 
 function Navbar() {
+  const logOut = () => {
+    alert("you logged out");
+    window.localStorage.clear();
+    window.location.href = "./login";
+  };
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top p-2">
@@ -27,7 +32,7 @@ function Navbar() {
         >
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active p-2 ">
-              <a className="nav-link font-weight-bold text-dark" href="/">
+              <a className="nav-link font-weight-bold text-dark" href="/tasks">
                 Home{" "}
               </a>
             </li>
@@ -47,6 +52,11 @@ function Navbar() {
             <li className="nav-item p-2">
               <a className="nav-link font-weight-bold text-dark" href="/files">
                 Files
+              </a>
+            </li>
+            <li className="nav-item p-2" onClick={logOut}>
+              <a className="nav-link font-weight-bold text-dark" href="/login">
+                LogOut
               </a>
             </li>
           </ul>

@@ -11,8 +11,27 @@ function SignUp() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(fname, lname, email, password);
-    
-    }
+
+    fetch("http://localhost:3001/register", {
+      method: "POST",
+      crossDomain: true,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify({
+        fname,
+        email,
+        lname,
+        password,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data, "Registration successfull");
+      });
+  };
 
   return (
     <form onSubmit={handleSubmit}>
