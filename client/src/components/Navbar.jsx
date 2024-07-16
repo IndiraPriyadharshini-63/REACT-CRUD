@@ -54,6 +54,7 @@ function Navbar() {
                 Files
               </a>
             </li>
+
             <li className="nav-item p-2" onClick={logOut}>
               <a className="nav-link font-weight-bold text-dark" href="/login">
                 LogOut

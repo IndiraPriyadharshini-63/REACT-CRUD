@@ -8,6 +8,7 @@ import UpdateTask from "./pages/UpdateTask";
 import Files from "./pages/Files";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
+import ResetPassword from "./components/ResetPassword";
 
 function App() {
   const isLoggedIn = window.localStorage.getItem("loggedIn");
@@ -23,6 +24,7 @@ function App() {
           <Route path="/files" element={<Files />}></Route>
           <Route path="/register" element={<SignUp />}></Route>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/reset-password" element={<ResetPassword />} />
         </Routes>
       </BrowserRouter>
     </div>
