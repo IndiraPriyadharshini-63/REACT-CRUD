@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { getFileRoute, uploadFileRoute } from "../utils/APIRoutes";
-import "../styles/PdfUpload.css";
 import { pdfjs } from "react-pdf";
 import PdfComp from "./PdfComp";
 
@@ -10,20 +10,18 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   import.meta.url
 ).toString();
 
-function PdfUpload() {
+function PdfUploadV2() {
   const [title, setTitle] = useState("");
   const [file, setFile] = useState("");
   const [allImage, setAllImage] = useState(null);
   const [pdfFile, setPdfFile] = useState(null);
   const [status, setStatus] = useState("initial");
-
   const handleFileChange = (e) => {
     if (e.target.files) {
       setStatus("initial");
       setFile(e.target.files[0]);
     }
   };
-
   const getPdf = async () => {
     const result = await axios.get(getFileRoute);
     console.log(result.data.data);
@@ -55,61 +53,59 @@ function PdfUpload() {
 
   const showPdf = (pdf) => {
     setPdfFile(`http://localhost:3001/files/${pdf}`);
+    console.log(pdfFile);
   };
   return (
+    <div class="container">
+      <div class="row">
+        <div class="col-4">
+          <h4>Upload files</h4>
+          <br />
+          <form onSubmit={submitFile}>
+            <input
+              type="text"
+              placeholder="title"
+              className="form-control"
+              required
+              onChange={(e) => setTitle(e.target.value)}
+            />
 
+            <br />
+            <input
+              type="file"
+              className="form-control"
+              accept="application/pdf"
+              required
+              onChange={handleFileChange}
+            />
+            <br />
+            <button className="btn btn-primary" type="submit">
+              Submit
+            </button>
+          </form>
+          <br />
 
-
-    <div className="file-ulpoad">
-      <div className="alertNotification">
-      <Result status={status}/>
-      </div>
-      
-      <form className="formStyle" onSubmit={submitFile}>
-        <h4>Upload Files</h4>
-        <br />
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Title"
-          required
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <br />
-        <input
-          type="file"
-          className="form-control"
-          accept="application/pdf"
-          required
-          onChange={handleFileChange}
-        />
-        <br />
-        <button className="btn btn-primary" type="submit">
-          Submit
-        </button>
-      </form>
-      <br />
-      <div className="uploaded">
-        <h4>Uploaded PDF</h4>
-        <div className="output-div">
+          <h4>Files</h4>
           {allImage == null
             ? ""
             : allImage.map((data) => {
                 return (
-                  <div className="input-div">
-                    <h6 >Title: {data.title}</h6>
-                    <button
-                      className="btn btn-primary"
-                      onClick={() => showPdf(data.pdf)}
-                    >
-                      Show PDF
-                    </button>
-                  </div>
+                  <h6
+                    onClick={() => showPdf(data.pdf)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    {data.title}
+                  </h6>
                 );
               })}
         </div>
+        <div class="col-8">
+          <div>
+            <Result  status={status}/>
+          </div>
+          <PdfComp pdfFile={pdfFile}/>
+        </div>
       </div>
-      <PdfComp pdfFile={pdfFile} />
     </div>
   );
 }
@@ -125,4 +121,5 @@ const Result = ({ status }) => {
     return null;
   }
 };
-export default PdfUpload;
+
+export default PdfUploadV2;
