@@ -43,7 +43,7 @@ function CalendarComponent() {
 
   return (
     <>
-    <Navbar />
+    
       <div className="calendar-component">
         <Calendar
           views={["day", "agenda", "work_week", "month"]}

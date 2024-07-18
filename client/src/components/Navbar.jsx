@@ -1,70 +1,54 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import React from "react";
-import logo from "../assets/logo192.png";
+import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
+import Hamburger from "../assets/hamburger.svg";
+import Brand from "../assets/logo.png";
 
-function Navbar() {
-  const logOut = () => {
+import "../styles/Navbar.css";
+
+const Navbar = () => {
+  const [showNavbar, setShowNavbar] = useState(false);
+
+  const handleShowNavbar = () => {
+    setShowNavbar(!showNavbar);
+  };
+
+    const logOut = () => {
     alert("you logged out");
     window.localStorage.clear();
     window.location.href = "./login";
   };
   return (
-    <>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top p-2">
-        <a className="navbar-brand" href="/">
-          <img src={logo} width="30" height="30" alt="" className="m-2" />
-        </a>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-
-        <div
-          className="collapse navbar-collapse d-felx justify-content-end"
-          id="navbarSupportedContent"
-        >
-          <ul className="navbar-nav mr-auto">
-            <li className="nav-item active p-2 ">
-              <a className="nav-link font-weight-bold text-dark" href="/tasks">
-                Home{" "}
-              </a>
+    <nav className="navbar">
+      <div className="container">
+        <div className="logo">
+            <h1>Logo</h1>
+        </div>
+        <div className="menu-icon" onClick={handleShowNavbar}>
+        <i class="bi bi-list"></i>
+          
+        </div>
+        <div className={`nav-elements  ${showNavbar && 'active'}`}>
+          <ul>
+            <li>
+              <NavLink to="/">Home</NavLink>
             </li>
-            <li className="nav-item p-2">
-              <a className="nav-link font-weight-bold text-dark" href="/create">
-                Add Task
-              </a>
+            <li>
+              <NavLink to="/create">Add Tasks</NavLink>
             </li>
-            <li className="nav-item p-2">
-              <a
-                className="nav-link font-weight-bold text-dark"
-                href="/create-event"
-              >
-                Create Event
-              </a>
+            <li>
+              <NavLink to="/files">Files</NavLink>
             </li>
-            <li className="nav-item p-2">
-              <a className="nav-link font-weight-bold text-dark" href="/files">
-                Files
-              </a>
+            <li>
+              <NavLink to="/create-event">Events</NavLink>
             </li>
-
-            <li className="nav-item p-2" onClick={logOut}>
-              <a className="nav-link font-weight-bold text-dark" href="/login">
-                LogOut
-              </a>
+            <li>
+              <NavLink to="/login" onClick={logOut}>Logout</NavLink>
             </li>
           </ul>
         </div>
-      </nav>
-    </>
+      </div>
+    </nav>
   );
-}
+};
 
 export default Navbar;

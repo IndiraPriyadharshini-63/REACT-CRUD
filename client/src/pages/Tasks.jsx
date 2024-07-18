@@ -25,7 +25,7 @@ function Tasks() {
   };
   return (
     <>
-      <Navbar />
+      
       <div className=" d-flex flex-column vh-100 justify-content-center align-items-center">
         <div className="vw-100 bg-white p-3 ">
           {/* <Link to="/create" className="btn btn-primary m-2">

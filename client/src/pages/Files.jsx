@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 function Files() {
   return (
     <>
-      <Navbar />
+      
       <PdfUpload />
     </>
   );
